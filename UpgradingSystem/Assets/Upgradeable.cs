@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class Upgradeable : MonoBehaviour {
 
@@ -9,4 +10,9 @@ public class Upgradeable : MonoBehaviour {
     public float[] FloatValues;
 
     public bool[] BoolValues;
+
+
+
+    public Text[] TextFloatValueDisplay;
+    public Text[] TextBoolValueDisplay;
 }
