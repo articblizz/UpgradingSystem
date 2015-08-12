@@ -13,6 +13,8 @@ public class CannonScript : Upgradeable {
     // index 0 = Cannon force
     // index 1 = rate of fire!
 
+	// Peter är bäst
+
     float rotSpeed = 0.5f;
 
     bool canShoot = true;
