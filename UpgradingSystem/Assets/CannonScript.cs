@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CannonScript : Upgradeable {
+public class CannonScript : MonoBehaviour {
 
     public Transform cannonBase;
     public Transform cannonEdge;
@@ -30,29 +30,29 @@ public class CannonScript : Upgradeable {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	//void Update () {
 
-        if (!canShoot)
-        {
-            rofTimer += Time.deltaTime;
-            if (rofTimer >= FloatValues[1])
-            {
-                canShoot = true;
-                rofTimer = 0;
-            }
-        }
-        var dir = Input.GetAxis("Horizontal");
+ //       if (!canShoot)
+ //       {
+ //           rofTimer += Time.deltaTime;
+ //           if (rofTimer >= FloatValues[1])
+ //           {
+ //               canShoot = true;
+ //               rofTimer = 0;
+ //           }
+ //       }
+ //       var dir = Input.GetAxis("Horizontal");
 
-        cannonBase.Rotate(0, 0, -dir * rotSpeed);
+ //       cannonBase.Rotate(0, 0, -dir * rotSpeed);
 
-        if (Input.GetKey(KeyCode.Space) && canShoot)
-        {
-            canShoot = false;
+ //       if (Input.GetKey(KeyCode.Space) && canShoot)
+ //       {
+ //           canShoot = false;
 
 
-            var cb = (GameObject)Instantiate(CannonBall, cannonEdge.position, cannonBase.rotation);
-            cb.GetComponent<Rigidbody2D>().AddForce(cb.transform.right * FloatValues[0]);
-            Destroy(cb, 15);
-        }
-	}
+ //           var cb = (GameObject)Instantiate(CannonBall, cannonEdge.position, cannonBase.rotation);
+ //           cb.GetComponent<Rigidbody2D>().AddForce(cb.transform.right * FloatValues[0]);
+ //           Destroy(cb, 15);
+ //       }
+	//}
 }
