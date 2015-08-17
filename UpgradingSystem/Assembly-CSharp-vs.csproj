@@ -49,6 +49,7 @@
      <Compile Include="Assets\CannonScript.cs" />
      <Compile Include="Assets\FeffesUpgradeSystem\ButtonUpgradeScript.cs" />
      <Compile Include="Assets\FeffesUpgradeSystem\CurrencySystemScript.cs" />
+     <Compile Include="Assets\FeffesUpgradeSystem\DisplayVariableTextScript.cs" />
      <Compile Include="Assets\FeffesUpgradeSystem\UpgradeScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>A:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

@@ -3,56 +3,54 @@ using System.Collections;
 
 public class CannonScript : MonoBehaviour {
 
-    public Transform cannonBase;
-    public Transform cannonEdge;
-    public GameObject CannonBall;
+	public Transform cannonBase;
+	public Transform cannonEdge;
+	public GameObject CannonBall;
 
-    //public float Force = 100;
+	//public float Force = 100;
 
-    // note to self:
-    // index 0 = Cannon force
-    // index 1 = rate of fire!
+	// note to self:
+	// index 0 = Cannon force
+	// index 1 = rate of fire!
 
-	// Peter är bäst
+	float rotSpeed = 0.5f;
 
-    float rotSpeed = 0.5f;
+	bool canShoot = true;
+	float rofTimer = 0;
 
-    bool canShoot = true;
-    float rofTimer = 0;
-
-
-    //float RateOfFire = 1;
-
+	UpgradeScript upgrade;
 
 	// Use this for initialization
 	void Start () {
+
+		upgrade = GetComponent<UpgradeScript>();
 	
 	}
-	
-	// Update is called once per frame
-	//void Update () {
 
- //       if (!canShoot)
- //       {
- //           rofTimer += Time.deltaTime;
- //           if (rofTimer >= FloatValues[1])
- //           {
- //               canShoot = true;
- //               rofTimer = 0;
- //           }
- //       }
- //       var dir = Input.GetAxis("Horizontal");
+	void Update()
+	{
 
- //       cannonBase.Rotate(0, 0, -dir * rotSpeed);
+		if (!canShoot)
+		{
+			rofTimer += Time.deltaTime;
+			if (rofTimer >= upgrade.GetFloat("RateOfFire"))
+			{
+				canShoot = true;
+				rofTimer = 0;
+			}
+		}
+		var dir = Input.GetAxis("Horizontal");
 
- //       if (Input.GetKey(KeyCode.Space) && canShoot)
- //       {
- //           canShoot = false;
+		cannonBase.Rotate(0, 0, -dir * rotSpeed);
+
+		if (Input.GetKey(KeyCode.Space) && canShoot)
+		{
+			canShoot = false;
 
 
- //           var cb = (GameObject)Instantiate(CannonBall, cannonEdge.position, cannonBase.rotation);
- //           cb.GetComponent<Rigidbody2D>().AddForce(cb.transform.right * FloatValues[0]);
- //           Destroy(cb, 15);
- //       }
-	//}
+			var cb = (GameObject)Instantiate(CannonBall, cannonEdge.position, cannonBase.rotation);
+			cb.GetComponent<Rigidbody2D>().AddForce(cb.transform.right * upgrade.GetFloat("BulletForce"));
+			Destroy(cb, 15);
+		}
+	}
 }

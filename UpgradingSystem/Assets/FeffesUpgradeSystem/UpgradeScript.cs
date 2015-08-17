@@ -37,6 +37,38 @@ public class UpgradeScript : MonoBehaviour {
     }
 
 
+    public float GetFloat(string name)
+    {
+        for (int i = 0; i < myVariables.Count; i++)
+        {
+            if (myVariables[i].VariableName == name)
+                return myVariables[i].FloatValue;
+        }
+
+        throw new System.Exception("No variable with that name");
+    }
+    public float GetFloat(int index)
+    {
+        return myVariables[index].FloatValue;
+    }
+
+
+    public bool GetBool(string name)
+    {
+        for (int i = 0; i < myVariables.Count; i++)
+        {
+            if (myVariables[i].VariableName == name)
+                return myVariables[i].BoolValue;
+        }
+
+        throw new System.Exception("No variable with that name");
+    }
+
+    public bool GetBool(int index)
+    {
+        return myVariables[index].BoolValue;
+    }
+
     public void ButtonClick(ButtonUpgradeScript script)
     {
 
