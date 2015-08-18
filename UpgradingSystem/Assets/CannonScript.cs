@@ -30,27 +30,35 @@ public class CannonScript : MonoBehaviour {
 	void Update()
 	{
 
-		if (!canShoot)
-		{
-			rofTimer += Time.deltaTime;
-			if (rofTimer >= upgrade.GetFloat("RateOfFire"))
-			{
-				canShoot = true;
-				rofTimer = 0;
-			}
-		}
+        if (!canShoot)
+        {
+            rofTimer += Time.deltaTime;
+            if (rofTimer >= upgrade.GetFloat("RateOfFire"))
+            {
+                canShoot = true;
+                rofTimer = 0;
+            }
+        }
+        else if (upgrade.GetBool("AutoShoot"))
+            Shoot();
 		var dir = Input.GetAxis("Horizontal");
 
 		cannonBase.Rotate(0, 0, -dir * rotSpeed);
 
 		if (Input.GetKey(KeyCode.Space) && canShoot)
 		{
-			canShoot = false;
 
-
-			var cb = (GameObject)Instantiate(CannonBall, cannonEdge.position, cannonBase.rotation);
-			cb.GetComponent<Rigidbody2D>().AddForce(cb.transform.right * upgrade.GetFloat("BulletForce"));
-			Destroy(cb, 15);
+            Shoot();
 		}
 	}
+
+    void Shoot()
+    {
+        canShoot = false;
+
+
+        var cb = (GameObject)Instantiate(CannonBall, cannonEdge.position, cannonBase.rotation);
+        cb.GetComponent<Rigidbody2D>().AddForce(cb.transform.right * upgrade.GetFloat("BulletForce"));
+        Destroy(cb, 15);
+    }
 }
