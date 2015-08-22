@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using System;
+using System.IO;
 
-[System.Serializable]
+[Serializable]
 public class Variable
 {
     public enum DataType
@@ -26,14 +28,57 @@ public class UpgradeScript : MonoBehaviour {
 
     public CurrencySystemScript currencySystem;
 
+    public string GameName;
+
     // Use this for initialization
     void Start () {
-    
+
     }
-    
+
     // Update is called once per frame
     void Update () {
     
+    }
+
+    public void SaveList(bool saveCurrencySystem = false)
+    {
+        string sFile = GameName + "_Data\\save.bin";
+        //File.Create(sFile);
+
+        using (Stream stream = File.Create(sFile))
+        {
+            var bFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            bFormatter.Serialize(stream, myVariables);
+        }
+
+        if (saveCurrencySystem)
+        {
+            PlayerPrefs.SetString("MoneyName", currencySystem.CurrencyName);
+            PlayerPrefs.SetFloat("MoneyQuantity", currencySystem.Moneys);
+        }
+
+    }
+
+
+    /// <summary>
+    /// Will overwrite the current list
+    /// </summary>
+    public void LoadList(bool loadCurrencySystem = false)
+    {
+        string sFile = GameName + "_Data\\save.bin";
+
+        using (Stream stream = File.Open(sFile, FileMode.Open))
+        {
+            var bFormatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+            myVariables = (List<Variable>)bFormatter.Deserialize(stream);
+        }
+
+
+        if (loadCurrencySystem)
+        {
+            currencySystem.Moneys = PlayerPrefs.GetFloat("MoneyQuantity");
+            currencySystem.CurrencyName = PlayerPrefs.GetString("MoneyName");
+        }
     }
 
 

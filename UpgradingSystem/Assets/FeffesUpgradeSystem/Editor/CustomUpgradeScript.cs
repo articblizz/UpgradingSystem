@@ -18,7 +18,10 @@ public class ExtendEditor : Editor {
         script.currencySystem = EditorGUILayout.ObjectField("Currency System", script.currencySystem, typeof(CurrencySystemScript), true) as CurrencySystemScript;
 
 
+
         GetTarget.Update();
+
+        script.GameName = EditorGUILayout.TextField("Gamename (.exe)", script.GameName);
 
         EditorGUILayout.Space();
         EditorGUILayout.Space();
